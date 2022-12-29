@@ -3,13 +3,11 @@ package com.example.lab13
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class MyService : Service() {
     private var channel = ""
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         intent?.extras?.let {
             channel = it.getString("channel", "")
@@ -27,7 +25,7 @@ class MyService : Service() {
             }
         )
 
-        val jab: Job = GlobalScope.launch {
+        GlobalScope.launch {
             delay(3000)
             broadcast(
                 when(channel) {

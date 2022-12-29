@@ -6,20 +6,18 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import com.example.lab13.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    private val receiver = object : BroadcastReceiver(){
-        override fun onReceive(p0: Context?, p1: Intent?) {
-            println("receive")
+    private val receiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
             intent.extras?.let {
-                println("testing"+it.getString("msg"))
                 binding.tvMsg.text = "${it.getString("msg")}"
             }
         }
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
